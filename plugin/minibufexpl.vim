@@ -2456,7 +2456,12 @@ function! s:SwitchWindow(action, ...)
   call <SID>DEBUG('previous window is: '.winnr(),10)
   let l:wincmd = l:aucmd.l:winnr.'wincmd '.a:action
   call <SID>DEBUG('window switching command is: '.l:wincmd,10)
+  let l:t_vb = &t_vb
+  let l:vb = &visualbell
+  set visualbell t_vb=
   exec l:wincmd
+  let &visualbell = l:vb
+  let &t_vb = l:t_vb
   call <SID>DEBUG('current window is: '.winnr(),10)
 
   call <SID>DEBUG('Leaving SwitchWindow()',10)
